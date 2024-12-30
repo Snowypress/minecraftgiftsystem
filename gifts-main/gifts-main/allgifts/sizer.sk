@@ -1,0 +1,57 @@
+on respawn:
+	if {sizercd.%player's uuid%.timer} is set:
+		delete {sizercd.%player's uuid%.timer}
+		message "&2size change READY." to player
+every 1 second:
+	loop players:
+		if {sizercd.%loop-player's uuid%.timer} is set:
+			remove 1 from {sizercd.%loop-player's uuid%.timer}
+			if {sizercd.%loop-player's uuid%.timer} is 0:
+				delete {sizercd.%loop-player's uuid%.timer}
+				message "&2size change READY." to loop-player
+# ability changes size
+on swap hand items:
+	{%player's uuid%.gifts::*} contains "sizer":
+		if player is sneaking:
+			if {sizercd.%player's uuid%.timer} is not set:
+				player's food level > 0:
+					add 15 to {sizercd.%player's uuid%.timer}
+					remove 0.5 from food level of player
+					message "&6size change in progress, please wait 3 seconds." to player
+					wait 3 seconds
+					play sound "minecraft:entity.bat.takeoff" at player to all players
+					if {sizer.%player's uuid%} is not set:
+						set {sizer.%player's uuid%} to 0
+					if {sizer.%player's uuid%} = 5:
+						set {sizer.%player's uuid%} to 0
+					add 1 to {sizer.%player's uuid%}
+					if {sizer.%player's uuid%} = 5:
+						set {sizer.%player's uuid%} to 1
+					if {sizer.%player's uuid%} = 1:
+						set generic scale attribute of player to 0.8
+					if {sizer.%player's uuid%} = 2:
+						set generic scale attribute of player to 1
+					if {sizer.%player's uuid%} = 3:
+						set generic scale attribute of player to 1.4
+					if {sizer.%player's uuid%} = 4:
+						set generic scale attribute of player to 1
+					add 15 to {sizercd.%player's uuid%.timer}
+			else:
+				message "&4size change on cooldown." to player
+# if large size, deal more damage
+on damage:
+	{sizer.%attacker's uuid%} = 3:
+		set damage to damage * 1.2
+on damage:
+	{sizer.%attacker's uuid%} = 1:
+		set damage to damage * 0.9
+# if large size, take less damage
+on damage:
+	{sizer.%victim's uuid%} = 3:
+		set damage to damage * 0.8
+# on consume, if small size, heal more 
+on eat:
+	{sizer.%player's uuid%} = 1:
+		if event-item is not water bottle:
+			add 2 to food level of player
+			add 1 to health of player

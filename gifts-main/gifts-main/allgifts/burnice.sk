@@ -1,0 +1,82 @@
+on right click:
+	if {%player's uuid%.gifts::*} contains "burnice":
+		if player's held item is blaze rod:
+			player does not have potion Bad Luck:
+				remove 1 of player's held item from player
+				apply bad luck to player for 15 seconds
+				push player upwards at speed 2
+				push player forwards at speed 2
+				play sound "entity.generic.explode" at player
+on damage:
+	if {%victim's uuid%.gifts::*} contains "burnice":
+		damage cause is fall:
+			set damage to damage*0.5
+on right click:
+	if {%player's uuid%.gifts::*} contains "burnice":
+		if player's held item is blaze powder:
+			player does not have potion Luck:
+				remove 1 of player's held item from player
+				apply luck to player for 60 seconds
+				if the player has potion weaving:
+					remove weaving from the player
+				if the player has potion oozing:
+					remove oozing from the player
+				if the player has potion slowness:
+					remove slowness from the player
+				apply slowness of tier 4 to player for 12 seconds
+				apply oozing of tier 3 to player for 7 seconds
+				apply weaving of tier 3 to player for 12 seconds
+				set {_t} to 0
+				while player has potion oozing:
+					shoot small fireball from player with velocity 3
+					shoot snowball from player with velocity 5
+					play sound "entity.warden.roar" at player
+					wait 0.05 second
+					set {_t} to {_t} + 1
+				play sound "block.ladder.hit" at player
+				wait 4 second
+				play sound "block.ladder.hit" at player
+
+on damage:
+	damage cause is projectile:
+		event-projectile is snowball:
+			if {%attacker's uuid%.gifts::*} contains "burnice":
+				chance of 10%:	
+					if victim has potion fire resistance:
+						remove fire resistance from the victim
+					else:
+						if the victim has potion poison:
+							if the amplifier of weaving of victim = 1:
+								remove poison from the victim
+						apply poison of tier 2 to victim for 1 seconds
+				ignite victim for 6 seconds
+				set victim's health to victim's health - 0.25
+												
+on held item change:
+	if {%player's uuid%.gifts::*} contains "burnice":
+		player has potion weaving:
+			if the amplifier of weaving of player > 2:
+				cancel event
+on damage:
+	if {%attacker's uuid%.gifts::*} contains "burnice":
+		if attacker's attack cooldown is 1:
+			if hit is critical:
+				if attacker's held item is wooden sword or stone sword or golden sword or iron sword or diamond sword or netherite sword or trident or wooden axe or stone axe or iron axe or diamond axe or gold axe or netherite axe or mace or air:
+					chance of 25%:
+						if the attacker does not have potion resistance:
+							apply resistance of tier 5 to attacker for 0.2 seconds
+						shoot fireball from attacker with velocity 200
+						shoot fireball from attacker with velocity 200
+						shoot fireball from attacker with velocity 200
+						set victim's health to victim's health - 1.75
+				if attacker's held item is mace:
+					if the attacker does not have potion resistance:
+						apply resistance of tier 5 to attacker for 0.2 seconds
+					shoot fireball from attacker with velocity 200
+					shoot fireball from attacker with velocity 200
+					shoot fireball from attacker with velocity 200
+					set victim's health to victim's health - 1.75
+on damage:
+	if {%victim's uuid%.gifts::*} contains "burnice":
+		chance of 15%:	
+			set damage to damage * 1.3

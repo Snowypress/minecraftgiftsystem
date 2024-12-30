@@ -1,0 +1,50 @@
+on damage:
+    if {%attacker's uuid%.gifts::*} contains "berserker":
+        if attacker has potion luck:
+            if attacker's attack cooldown is 1:
+                set damage to damage * 1.4
+on damage:
+    if {%victim's uuid%.gifts::*} contains "berserker":
+        if victim has potion luck:
+            set damage to damage * 0.9
+on right click:
+    if {%player's uuid%.gifts::*} contains "berserker":
+        if player's held item is amethyst shard:
+            player does not have potion luck:
+                player does not have potion Bad Luck:
+                    remove 1 of player's held item from player
+                    set player's health to player's health/4*3
+                    apply luck of tier 1 to player for 20 seconds
+                    apply bad luck of tier 1 to player for 60 seconds
+                    play sound "minecraft:entity.wither_skeleton.hurt" at player
+                    
+
+on damage:
+    if {%victim's uuid%.gifts::*} contains "berserker":
+        damage cause is projectile:
+            event-projectile is arrow:
+                chance of 50%:
+                    cancel event
+                    play sound "minecraft:entity.player.big_fall" to victim
+
+on damage:
+    if {%attacker's uuid%.gifts::*} contains "berserker":
+        if hit is critical:
+            chance of (25)%:
+                victim does not have potion wither:
+                    apply wither of tier 2 to victim for 3 seconds
+                    play sound "minecraft:entity.enderman.scream" at victim 
+            chance of (25%):
+                victim does not have potion poison:
+                    apply poison of tier 2 to victim for 5 seconds
+                    play sound "minecraft:entity.warden.attack_impact" at victim
+
+# curse of degradation
+on damage:
+    if {%victim's uuid%.gifts::*} contains "berserker":
+        victim does not have potion luck:
+            set damage to damage * 1.1
+            victim does not have potion slowness:
+                apply slowness of tier 2 to victim for 3 seconds
+                play sound "minecraft:entity.warden.hurt" at victim
+        

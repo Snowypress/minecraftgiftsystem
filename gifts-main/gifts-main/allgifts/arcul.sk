@@ -1,0 +1,51 @@
+# turn stick into arrow ability
+on right click:
+	if {%player's uuid%.gifts::*} contains "arcul":
+		if player's held item is spider eyes:
+			player does not have potion Bad Luck:
+				remove 1 of player's held item from player
+				shoot arrow from player with velocity 15
+				apply bad luck of tier 1 to player for 20 seconds
+				if the player has potion weaving:
+					remove weaving from the player
+				apply weaving of tier 3 to player for 2 seconds
+				play sound "entity.generic.explode" at player
+on damage:
+	damage cause is projectile:
+		event-projectile is arrow:
+			if {%attacker's uuid%.gifts::*} contains "arcul":
+				attacker has potion weaving:
+					if the amplifier of weaving of attacker > 2:
+						remove weaving from attacker
+						if the victim has potion poison:
+							if the amplifier of poison of attacker != 4:
+								remove poison from victim
+						apply poison of tier 4 to victim for 5 second
+# turn flint into fire ability
+on damage:
+	if {%victim's uuid%.gifts::*} contains "arcul":
+		event-damage cause is burning:
+			cancel event
+		event-damage cause is fire:
+			cancel event
+		event-damage cause is lava:
+			cancel event
+		event-damage cause is campfire:
+			cancel event
+		event-damage cause is magma block:
+			cancel event
+				
+on swap hand items:
+	if {%player's uuid%.gifts::*} contains "arcul":
+		player does not have potion Luck:
+			if player is sneaking:
+				loop all entities in radius 10 of player:
+					if loop-entity is not player:
+						if the loop-entity has potion slowness:
+							if the amplifier of slowness of loop-entity is 7:
+								apply slowness of tier 7 to loop-entity for 5 seconds
+							else:
+								remove slowness from loop-entity
+						apply slowness of tier 7 to loop-entity for 5 seconds
+				apply luck of tier 1 to player for 20 seconds
+				play sound "block.glass.break" at player

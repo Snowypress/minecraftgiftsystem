@@ -1,0 +1,75 @@
+on left click:
+	if {%player's uuid%.gifts::*} contains "commando":
+		if player's held item is iron ingot:
+			if player is sneaking:
+				player does not have potion Bad Luck:
+					remove 1 of player's held item from player
+					apply bad luck to player for 25 seconds
+					if the player has potion weaving:
+						remove weaving from the player
+					if the player has potion oozing:
+						remove oozing from the player
+					if the player has potion slowness:
+						remove slowness from the player
+					apply slowness of tier 2 to player for 8 seconds
+					apply weaving of tier 3 to player for 8 seconds
+					apply oozing of tier 3 to player for 2.9 seconds
+					while player has potion oozing:
+						set {_speed} to random number from 3 to 8
+						
+						wait 0.1 second
+						shoot shulker bullet from player with velocity {_speed}
+						play sound "entity.generic.explode" at player
+					play sound "block.ladder.hit" at player
+					wait 4 second
+					play sound "block.ladder.hit" at player
+on held item change:
+	if {%player's uuid%.gifts::*} contains "commando":
+		player has potion weaving:
+			if the amplifier of weaving of player > 2:
+				cancel event
+on damage:
+	damage cause is projectile:
+		event-projectile is shulker bullet:
+			if {%attacker's uuid%.gifts::*} contains "commando":
+				set damage to 5
+				set victim's health to victim's health - 0.34
+				wait 1 tick
+				remove levitation from the victim
+				chance of 10%:
+					if item cooldown of shield for victim < 1 second:
+						set item cooldown of shield for victim to 3 seconds		
+on left click:
+	if {%player's uuid%.gifts::*} contains "commando":
+		if player is sneaking:
+			if player's held item is tnt:
+				player does not have potion Luck:
+					remove 1 of player's held item from player
+					apply luck to player for 25 seconds
+					set {_missilecount} to 0
+					while {_missilecount} < 4:
+						set {_missilecount} to {_missilecount}+1
+						shoot fireball from player with velocity 3
+						play sound "entity.generic.explode" at player
+						wait 0.3 second
+				
+on eat:
+	if {%player's uuid%.gifts::*} contains "commando":
+		if event-item is water bottle:
+			add 0.25 to health of player
+		else if event-item is milk bucket:
+			add 0.75 to health of player
+			add 1.5 to hunger of player
+			add 3 to saturation of player
+			
+		else:
+			add 2 to hunger of player
+			add 1 to saturation of player
+		if hunger of player > 13:
+			set hunger of player to 13
+		if saturation of player > 30:
+			set saturation of player to 30
+on player pickup xp:
+	if {%player's uuid%.gifts::*} contains "commando":
+		subtract event-number/10*7 from total experience of player
+												

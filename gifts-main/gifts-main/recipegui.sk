@@ -1,0 +1,138 @@
+#recipes gui, may conflict with other commands!
+command /recipes:
+	trigger:
+		
+		delete {craftableitems::*}
+		add ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things" to {craftableitems::*}
+		add ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things" to {craftableitems::*}
+		add nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME" to {craftableitems::*}
+		#add amethyst shard named "&4Mysterious Gem" with lore "&7&oWhat is it?" and "&5&lRIGHT CLICK TO CONSUME" to {craftableitems::*}
+		add enchanted golden apple to {craftableitems::*}
+		add 2 phantom membrane to {craftableitems::*}
+		add 16 dragon's breath to {craftableitems::*}
+		add cobweb to {craftableitems::*}
+		add ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it" to {craftableitems::*}
+		add ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it" to {craftableitems::*}
+		add ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures" to {craftableitems::*}
+		add nether star named "&4Cursed Wish" with lore "&7&6used to change your gift into one of the cursed gifts." and "&5&lSHIFT RIGHT CLICK TO CONSUME" to {craftableitems::*}
+		add nether star named "&6Projectile Wish" with lore "&7&9used to change your gift into one of the ones that benefits from projectiles." and "&5&lSHIFT RIGHT CLICK TO CONSUME" to {craftableitems::*}
+		add nether star named "&2Mobility wish" with lore "&7&9used to change your gift into one of the ones that grant some mobility." and "&5&lSHIFT RIGHT CLICK TO CONSUME" to {craftableitems::*}
+		add nether star named "&8Debuff Wish" with lore "&7&9used to change your gift into one of the ones that grant some debuffs to others." and "&5&lSHIFT RIGHT CLICK TO CONSUME" to {craftableitems::*}
+		add nether star named "&dStrength wish" with lore "&7&9used to change your gift into one of the ones that grant additional damage." and "&5&lSHIFT RIGHT CLICK TO CONSUME" to {craftableitems::*}
+		add nether star named "&3Sustain wish" with lore "&7&9used to change your gift into one of the ones that grant some survivability." and "&5&lSHIFT RIGHT CLICK TO CONSUME" to {craftableitems::*}
+		add nether star named "&aSupport wish" with lore "&7&9used to change your gift into one of the ones benefits your team." and "&5&lSHIFT RIGHT CLICK TO CONSUME" to {craftableitems::*}
+		set {recipegui.%player's uuid%} to chest inventory with 11 rows named "&bRecipes"
+		fillRGUI({recipegui.%player's uuid%})
+		loop size of {craftableitems::*} times:
+			set slot (loop-value)-1 of {recipegui.%player's uuid%} to {craftableitems::%loop-value%}
+		open {recipegui.%player's uuid%} to player
+on inventory close:
+	event-inventory is {recipegui.%player's uuid%}:
+		delete {recipegui.%player's uuid%}
+on inventory click:
+	event-inventory is {recipegui.%player's uuid%}:
+		cancel event
+		event-slot is barrier:
+			make player execute command "/recipes"
+		{craftableitems::*} contains event-slot:
+			set {_e} to event-slot
+			fillRGUI({recipegui.%player's uuid%})
+			{_e} is ender pearl named "&4Orb of Life":
+				set {_materials::*} to leather, blaze rod, bone, gunpowder, 1 ender pearl, gunpowder, bone, blaze rod, leather, and ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things"
+			{_e} is ender pearl named "&4Amplified Orb of Life":
+				set {_materials::*} to diamond, ender pearl named "&4Orb of Life", diamond, ender pearl named "&4Orb of Life", wither skeleton skull, ender pearl named "&4Orb of Life", diamond, ender pearl named "&4Orb of Life", and diamond
+			{_e} is nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME":
+				set {_materials::*} to ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things", netherite scrap, gold block, netherite scrap, nautilus shell, netherite scrap, gold block, netherite scrap, ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+			#{_e} is amethyst shard named "&4Mysterious Gem" with lore "&7&oWhat is it?" and "&5&lRIGHT CLICK TO CONSUME":
+				#set {_materials::*} to redstone, diamond, redstone, netherite scrap, amethyst shard, netherite scrap, redstone, diamond, and redstone
+			{_e} is enchanted golden apple:
+				set {_i3} to ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+				set {_w3} to ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures"
+				set {_materials::*} to {_i3}, gold block, totem of undying, gold block, golden apple, gold block, totem of undying, gold block, and {_w3}
+			{_e} is phantom membrane:
+				set {_materials::*} to breeze rod, leather, breeze rod, leather, ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things", leather, breeze rod, leather, and breeze rod
+			{_e} is dragon's breath:
+				set {_materials::*} to phantom membrane, phantom membrane, phantom membrane, phantom membrane, phantom membrane, phantom membrane, glass, diamond, and glass
+			{_e} is cobweb:
+				set {_materials::*} to string, air, string, air, string, air, string, air, and string
+			{_e} is ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it":
+				set {_materials::*} to breeze rod, Gold block, cobweb, fermented spider eye, 1 ender pearl, fermented spider eye, cobweb, Gold block, and breeze rods
+			{_e} is ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it":
+				set {_materials::*} to gunpowder, fire charge, tnt, Spectral Arrow, ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things", Spectral Arrow, tnt, Firework Rocket, and gunpowder
+			{_e} is ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures":
+				set {_materials::*} to nether wart, diamond axe, nether wart, blaze rod, 1 ender pearl, blaze rod, emerald block, diamond block, and emerald block
+	
+			{_e} is nether star named "&4Cursed Wish" with lore "&7&6used to change your gift into one of the cursed gifts." and "&5&lSHIFT RIGHT CLICK TO CONSUME":
+				set {_i} to nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME"
+				set {_materials::*} to redstone block, {_i}, redstone block, {_i}, amethyst shard, {_i}, {_i}, diamond block, and {_i} 
+	
+			{_e} is nether star named "&6Projectile Wish" with lore "&7&9used to change your gift into one of the ones that benefits from projectiles." and "&5&lSHIFT RIGHT CLICK TO CONSUME":
+				set {_i} to nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME"
+				set {_i2} to ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things"
+				set {_i3} to ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+				set {_w1} to ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it"
+				set {_w2} to ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it"
+				set {_w3} to ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures"
+				set {_materials::*} to {_w2}, {_i3}, {_w2}, {_i}, {_i}, {_i}, bow, diamond block, and bow 
+
+	
+			{_e} is nether star named "&2Mobility wish" with lore "&7&9used to change your gift into one of the ones that grant some mobility." and "&5&lSHIFT RIGHT CLICK TO CONSUME":
+				set {_i} to nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME"
+				set {_i2} to ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things"
+				set {_i3} to ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+				set {_w1} to ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it"
+				set {_w2} to ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it"
+				set {_w3} to ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures"
+				set {_materials::*} to phantom membrane, {_i3}, phantom membrane, {_i}, {_i}, {_i}, phantom membrane, diamond block, and phantom membrane
+				
+	
+			{_e} is nether star named "&8Debuff Wish" with lore "&7&9used to change your gift into one of the ones that grant some debuffs to others." and "&5&lSHIFT RIGHT CLICK TO CONSUME": 
+				set {_i} to nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME"
+				set {_i2} to ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things"
+				set {_i3} to ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+				set {_w1} to ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it"
+				set {_w2} to ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it"
+				set {_w3} to ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures"
+				set {_materials::*} to {_w1}, Bucket of Pufferfish, {_w1}, {_i}, {_i}, {_i}, coal block, diamond block, and coal block 
+				
+	
+			{_e} is nether star named "&dStrength wish" with lore "&7&9used to change your gift into one of the ones that grant additional damage." and "&5&lSHIFT RIGHT CLICK TO CONSUME" :
+				set {_i} to nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME"
+				set {_i2} to ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things"
+				set {_i3} to ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+				set {_w1} to ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it"
+				set {_w2} to ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it"
+				set {_w3} to ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures"
+				set {_materials::*} to {_w3}, lapis block, {_w3}, {_i}, {_i3}, {_i}, golden apple, diamond block, and golden apple
+	
+			{_e} is nether star named "&3Sustain wish" with lore "&7&9used to change your gift into one of the ones that grant some survivability." and "&5&lSHIFT RIGHT CLICK TO CONSUME":
+				set {_i} to nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME"
+				set {_i2} to ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things"
+				set {_i3} to ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+				set {_w1} to ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it"
+				set {_w2} to ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it"
+				set {_w3} to ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures"
+				set {_materials::*} to {_i2}, lapis block,  {_i2}, {_i}, {_i3}, {_i}, golden apple, diamond block, and golden apple 
+	
+			{_e} is nether star named "&aSupport wish" with lore "&7&9used to change your gift into one of the ones benefits your team." and "&5&lSHIFT RIGHT CLICK TO CONSUME":
+				set {_i} to nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME"
+				set {_i2} to ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things"
+				set {_i3} to ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+				set {_w1} to ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it"
+				set {_w2} to ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it"
+				set {_w3} to ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures"
+				set {_materials::*} to {_i2}, golden apple, {_i2}, {_i}, {_i}, {_i}, gold block, diamond block, and gold block 
+			set slot 10 of {recipegui.%player's uuid%} to {_materials::1}
+			set slot 11 of {recipegui.%player's uuid%} to {_materials::2}
+			set slot 12 of {recipegui.%player's uuid%} to {_materials::3}
+			set slot 19 of {recipegui.%player's uuid%} to {_materials::4}
+			set slot 20 of {recipegui.%player's uuid%} to {_materials::5}
+			set slot 21 of {recipegui.%player's uuid%} to {_materials::6}
+			set slot 28 of {recipegui.%player's uuid%} to {_materials::7}
+			set slot 29 of {recipegui.%player's uuid%} to {_materials::8}
+			set slot 30 of {recipegui.%player's uuid%} to {_materials::9}
+			set slot 24 of {recipegui.%player's uuid%} to {_e}
+			set slot 53 of {recipegui.%player's uuid%} to barrier named "&cExit"
+function fillRGUI(i: inventory):
+	loop 72 times:
+		set slot (loop-value)-1 of {_i} to light blue stained glass pane

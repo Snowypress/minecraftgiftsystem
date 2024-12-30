@@ -1,0 +1,30 @@
+# bonemeal is more effective
+on right click:
+	if {%player's uuid%.gifts::*} contains "florith":
+		if player's level > 9:
+			if player is sneaking:
+				if player's held item is Dandelion or Poppy or Allium or Azure bluet or Pink Tulip or Oxeye daisy or Cornflower or Peony or Orange Tulip or Lilac or White Tulip or Sunflower or Rose Bush:
+					player does not have potion Bad Luck:
+						remove 1 of player's held item from player
+						reduce the player's level by 10
+						apply bad luck of tier 1 to player for 180 seconds
+						set {_w} to Honey Bottle named "&5Enhanced Honey"
+						give player {_w}
+on eat:
+	if name of player's tool is "&5Enhanced Honey":
+		player does not have potion health boost:
+			apply health boost of tier 1 to player for 90 seconds
+		else:
+			apply health boost of tier 1 to player for 15 seconds
+# more damage during the day
+on damage:
+	{%attacker's uuid%.gifts::*} contains "florith":
+		time is between 7:00 and 17:00:
+			set damage to damage * 1.15
+# gain absorption from food
+on eat:
+	{%player's uuid%.gifts::*} contains "florith":
+		player does not have potion absorption:
+			apply potion of absorption of tier 1 to player for 7 seconds
+		else:
+			apply potion of absorption of tier 1 to player for 5 seconds

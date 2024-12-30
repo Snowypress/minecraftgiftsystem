@@ -1,0 +1,32 @@
+command /giftset <offlineplayer> <text>:
+	permission: op
+	trigger:
+		if {%arg-1's uuid%.gifts::*} contains arg-2:
+			send "&b%arg-1% already has gift %arg-2%" to player
+		else:
+			resetPlayerAttributes(arg-1)
+			set generic scale attribute of arg-1 to 1
+			clear all potion effects of arg-1
+			delete {%arg-1's uuid%.gifts::*}
+			add arg-2 to {%arg-1's uuid%.gifts::*}
+			send "&b%arg-1%'s gift is now just %arg-2%" to player
+			send "&byour gift is now just %arg-2%" to arg-1
+command /giftclear <offlineplayer>:
+	permission: op
+	trigger:
+		delete {%arg-1's uuid%.gifts::*}
+		send "&b%arg-1%'s gifts have been cleared" to player
+		send "&bno more gifts" to arg-1
+command /giftclearall:
+	permission: op
+	trigger:
+		loop players:
+			if {%loop-player's uuid%.gifts::*} is set:
+				delete {%loop-player's uuid%.gifts::*}
+		send "&beveryone online has no more gifts" to player
+command /giftrerollall:
+	permission: op
+	trigger:
+		loop players:
+			giftReroll(loop-player)
+		send "&beveryone online's gift have been rerolled" to player

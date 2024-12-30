@@ -1,0 +1,77 @@
+on sneak toggle:
+	if {%player's uuid%.gifts::*} contains "glamoth":
+		if {Glamothdash.%player's uuid%.timer} is set:
+			message "&cDash is on cooldown." to player
+		else:
+			if player's food level > 3:
+				if player is sprinting:
+					push player in direction of player with velocity 2
+					add 7 to {Glamothdash.%player's uuid%.timer}
+					set player's food level to player's food level - 0.25
+				if player is swimming:
+					push player in direction of player with velocity 1
+# cancels fall damage
+on damage:
+	if {%victim's uuid%.gifts::*} contains "glamoth":
+		if damage cause is fall:
+			cancel event
+every 1 second:
+	loop players:
+		if {Glamothdash.%loop-player's uuid%.timer} is set:
+			remove 1 from {Glamothdash.%loop-player's uuid%.timer}
+			if {Glamothdash.%loop-player's uuid%.timer} is 0:
+				delete {Glamothdash.%loop-player's uuid%.timer}
+				message "&2Dash is READY." to loop-player
+		if {Glamothstrikecd.%loop-player's uuid%.timer} is set:
+			remove 1 from {Glamothstrikecd.%loop-player's uuid%.timer}
+			if {Glamothstrikecd.%loop-player's uuid%.timer} is 0:
+				delete {Glamothstrikecd.%loop-player's uuid%.timer}
+				message "&2Lightning strike strategem avaliable." to loop-player
+		if {Glamothstrike.%loop-player's uuid%.timer} is set:
+			remove 1 from {Glamothstrike.%loop-player's uuid%.timer}
+			if {Glamothstrike.%loop-player's uuid%.timer} is 0:
+				delete {Glamothstrike.%loop-player's uuid%.timer}
+				message "&4Lightning strike strategem expired." to loop-player
+on respawn:
+	if {Glamothdash.%player's uuid%.timer} is set:
+		delete {Glamothdash.%player's uuid%.timer}
+		message "&2Dash is READY." to player
+	if {Glamothstrikecd.%player's uuid%.timer} is set:
+		delete {Glamothstrikecd.%player's uuid%.timer}
+		message "&2Lightning caller avaliable." to player
+	if {Glamothstrike.%player's uuid%.timer} is set:
+		delete {Glamothstrike.%player's uuid%.timer}
+		message "&4Lightning caller expired." to player
+on swap hand items:
+	if {%player's uuid%.gifts::*} contains "glamoth":
+		if player is sneaking:
+			if {Glamothstrikecd.%player's uuid%.timer} is set:
+				message "&4Lightning caller on cooldown." to player
+			else:
+				add 25 to {Glamothstrike.%player's uuid%.timer}
+				add 180 to {Glamothstrikecd.%player's uuid%.timer}
+				message "&6Lightning caller activated." to player
+on damage:
+	if {%attacker's uuid%.gifts::*} contains "glamoth":
+		if {Glamothstrike.%attacker's uuid%.timer} is set:
+			chance of (20)%:
+				message "&6Locked on target" to attacker
+				loop 12 times:
+					set {_y} to victim's yaw
+					loop 90 times:
+						add 1 to {_z}
+						set {_v} to spherical vector with radius 3, yaw {_z}*4, pitch victim's pitch 
+						draw 1 of dust using dustOption(red, 1) at location 1 above victim ~ {_v}
+						delete {_v}
+						delete {_y}
+					wait 0.25 seconds
+					set {_z} to 0
+				strike lightning at victim
+				set victim's health to victim's health - 2
+				wait 3 tick
+				loop all entities in radius 4 of victim:
+					if loop-entity is charged creeper:
+						if loop-entity's health > 0:
+							set loop-entity's health to 0.01
+							apply wither of tier 255 to loop-entity for 20 seconds
+					

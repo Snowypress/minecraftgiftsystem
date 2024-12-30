@@ -1,0 +1,45 @@
+on damage:
+	if {%attacker's uuid%.gifts::*} contains "umbri":
+		if attacker's attack cooldown is 1:
+			if attacker is not victim:
+				if attacker doesn't have potion bad luck:
+					set {_t} to 0
+					chance of 25%:
+						if victim doesn't have potion blindness:
+							apply potion of blindness to victim for 10 seconds
+							set {_t} to 1
+					chance of 25%:
+						if victim doesn't have potion mining fatigue:
+							if {_t} < 1:
+								apply potion of mining fatigue of tier 2 to victim for 10 seconds
+								set {_t} to 1
+					chance of 25%:
+						if victim doesn't have potion weakness:
+							if {_t} < 1:
+								apply potion of weakness of tier 2 to victim for 10 seconds
+								set {_t} to 1
+					if {_t} = 1:
+						apply potion of bad luck to attacker for 15 seconds
+					delete {_t}
+on swap hand items:
+	if {%player's uuid%.gifts::*} contains "umbri":
+		player does not have potion Luck:
+			if player is sneaking:
+				loop all entities in radius 10 of player:
+					if loop-entity is not player:
+						apply potion of wither of tier 2 to loop-entity for 8 seconds
+						heal player by 0.25
+				apply luck of tier 1 to player for 70 seconds
+				play sound "block.glass.break" at player
+
+# apply slowness by shooting victims
+on damage:
+	if {%attacker's uuid%.gifts::*} contains "umbri":
+		if attacker's tool is bow:
+			attacker is not victim:
+				apply potion of slowness of tier 2 to victim for 5 seconds
+				play sound "minecraft:entity.player.attack.knockback" at attacker to attacker
+		if attacker's tool is crossbow:
+			attacker is not victim:
+				apply potion of slowness of tier 2 to victim for 5 seconds
+				play sound "minecraft:entity.player.attack.knockback" at attacker to attacker

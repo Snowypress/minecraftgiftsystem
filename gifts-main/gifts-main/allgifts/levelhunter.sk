@@ -1,0 +1,32 @@
+every 1 second:
+	loop players:
+		if {leverhunterblind.%loop-player's uuid%.timer} is set:
+			remove 1 from {leverhunterblind.%loop-player's uuid%.timer}
+			if {leverhunterblind.%loop-player's uuid%.timer} is 0:
+				delete {leverhunterblind.%loop-player's uuid%.timer}
+				message "&8 Darkness is READY." to loop-player			
+on damage:
+	if {%attacker's uuid%.gifts::*} contains "levelhunter":
+		if hit is critical:
+			chance of 50%:
+				if victim's level > attacker's level:
+					add 0.5 to health of attacker
+				else:
+					set damage to damage*1.2
+on player pickup xp:
+	if {%player's uuid%.gifts::*} contains "levelhunter":
+		add event-number to player's total experience
+on right click:
+	if {%player's uuid%.gifts::*} contains "levelhunter":
+		if player is sneaking:
+			if player's level > 4:
+				if {leverhunterblind.%player's uuid%.timer} is set:
+					message "&4Darkness is READY." to player
+				else:
+					add 30 to {leverhunterblind.%player's uuid%.timer}
+					reduce the player's level by 5
+					loop all entities in radius 10 of player:
+						if loop-entity is not player:
+							apply blindness of tier 1 to loop-entity for 5 seconds
+							play sound "entity.player.levelup" at loop-entity
+						

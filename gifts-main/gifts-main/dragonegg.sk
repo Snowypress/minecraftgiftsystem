@@ -1,0 +1,80 @@
+on right click:
+	if player is sneaking:
+		name of player's offhand tool is "&5dragon egg core":
+			if {ArtyCd.%player's uuid%.timer} is set:
+				message "&4DRAGON FIREBALL NOT READY." to player
+			else:
+				add 12 to {ArtyCd.%player's uuid%.timer}
+				shoot Dragon Fireball from player with velocity 2
+				play sound "entity.ender_dragon.shoot" at player
+on death:
+	victim is player:
+		name of victim's offhand tool is "&5dragon egg core":
+			if {NahIwin.%victim's uuid%.timer} is set:
+				chance of (0)%:
+					message "&4YOU ARE FUCKING DEAD." to victim
+			else:
+				cancel event
+				play sound "item.totem.use" at victim
+				play sound "entity.ender_dragon.growl" at victim
+				clear potion effects of victim
+				apply absorption of tier 2 to victim for 5 seconds
+				apply regeneration of tier 2 to victim for 45 seconds
+				apply strength of tier 2 to victim for 45 seconds
+				apply speed of tier 2 to victim for 45 seconds
+				apply saturation of tier 2 to victim for 3 seconds
+				apply fire resistance to victim for 45 seconds
+				message "&2HAHAHAHHAHAHHAHAHAHA....NAH.... I'D WIN." to attacker
+				message "&2NAH.... I'D WIN." to victim
+				add 250 to {NahIwin.%victim's uuid%.timer}
+on swap hand items:
+	if name of player's tool is "&5dragon egg core":
+		if player is sneaking:
+			if {DragonJumpCD.%player's uuid%.timer} is set:
+				message "&4DRAGON JUMP NOT READY." to player
+			else:
+				push player upwards at speed 3
+				add 50 to {DragonJumpCD.%player's uuid%.timer}
+				if the player has potion slow falling:
+					remove slow falling from the player
+				apply slow falling of tier 2 to player for 8.5 seconds
+				play sound "entity.ender_dragon.flap" at player
+	else: 
+		if name of player's offhand tool is "&5dragon egg core":
+			if player is sneaking:
+				if {DragonJumpCD.%player's uuid%.timer} is set:
+					message "&4DRAGON JUMP NOT READY." to player
+				else:
+					push player upwards at speed 3
+					add 50 to {DragonJumpCD.%player's uuid%.timer}
+					if the player has potion slow falling:
+						remove slow falling from the player
+					apply slow falling of tier 2 to player for 8.5 seconds
+					play sound "entity.ender_dragon.flap" at player
+on respawn:
+	if {ArtyCd.%player's uuid%.timer} is set:
+		delete {ArtyCd.%player's uuid%.timer}
+		message "&2DRAGON FIREBALL READY." to player
+	if {NahIwin.%player's uuid%.timer} is set:
+		delete {NahIwin.%player's uuid%.timer}
+		message "&5HAHAHAHAHAHA." to player
+	if {DragonJumpCD.%player's uuid%.timer} is set:
+		delete {DragonJumpCD.%player's uuid%.timer}
+		message "&2DRAGON JUMP READY." to player
+every 1 second:
+	loop players:
+		if {ArtyCd.%loop-player's uuid%.timer} is set:
+			remove 1 from {ArtyCd.%loop-player's uuid%.timer}
+			if {ArtyCd.%loop-player's uuid%.timer} is 0:
+				delete {ArtyCd.%loop-player's uuid%.timer}
+				message "&2DRAGON FIREBALL READY." to loop-player
+		if {NahIwin.%loop-player's uuid%.timer} is set:
+			remove 1 from {NahIwin.%loop-player's uuid%.timer}
+			if {NahIwin.%loop-player's uuid%.timer} is 0:
+				delete {NahIwin.%loop-player's uuid%.timer}
+				message "&5HAHAHAHAHAHA." to loop-player
+		if {DragonJumpCD.%loop-player's uuid%.timer} is set:
+			remove 1 from {DragonJumpCD.%loop-player's uuid%.timer}
+			if {DragonJumpCD.%loop-player's uuid%.timer} is 0:
+				delete {DragonJumpCD.%loop-player's uuid%.timer}
+				message "&2DRAGON JUMP READY." to loop-player

@@ -1,0 +1,211 @@
+# all recipes
+on load:
+	remove custom recipe "skbee:wish"
+	remove custom recipe "fari:wish"
+	remove custom recipe "fari:orboflife"
+	remove custom recipe "thalia:enchantedgoldenapple"
+	remove custom recipe "thalia:phantommembrane"
+	remove custom recipe "thalia:dragonsbreath"
+	remove custom recipe "thalia:cobweb"
+	remove custom recipe "thalia:dragoncore"
+	remove custom recipe "thalia:dragonegg"
+	remove custom recipe "wishesexpanded:orbofdisruption"
+	remove custom recipe "wishesexpanded:orbofcombustion"
+	remove custom recipe "wishesexpanded:orbofanger"
+	remove custom recipe "wishesexpanded:damagewish" 
+	remove custom recipe "wishesexpanded:supportwish" 
+	remove custom recipe "wishesexpanded:cursedwish" 
+	remove custom recipe "wishesexpanded:debuffwish" 
+	remove custom recipe "wishesexpanded:sustainwish" 
+	remove custom recipe "wishesexpanded:projectilewish" 
+	remove custom recipe "wishesexpanded:mobilitywish" 
+	set {_i} to nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME"
+	set {_i2} to ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things"
+	set {_i3} to ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+	set {_w1} to ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it"
+	set {_w2} to ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it"
+	set {_w3} to ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures"
+	set {_w4} to nether star named "&4Cursed Wish" with lore "&7&6used to change your gift into one of the cursed gifts." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+	set {_w5} to nether star named "&6Projectile Wish" with lore "&7&9used to change your gift into one of the ones that benefits from projectiles." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+	set {_w6} to nether star named "&2Mobility wish" with lore "&7&9used to change your gift into one of the ones that grant some mobility." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+	set {_w7} to nether star named "&8Debuff Wish" with lore "&7&9used to change your gift into one of the ones that grant some debuffs to others." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+	set {_w8} to nether star named "&dStrength wish" with lore "&7&9used to change your gift into one of the ones that grant additional damage." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+	set {_w9} to nether star named "&3Sustain wish" with lore "&7&9used to change your gift into one of the ones that grant some survivability." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+	set {_w10} to nether star named "&aSupport wish" with lore "&7&9used to change your gift into one of the ones benefits your team." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+	set {_i4} to amethyst shard named "&5Dragon egg core" with lore "&7&2Hold it in your offhand" and "&9Ability 1: 12 second cd, shift right click to fire a dragon fireball" and "&9Ability 2: 4 minute cd, just acts like a totem excepted slightly buffed" and "&9Ability 3: 1 minute cd, shift switch off hand to just get launched high"
+	register shaped recipe for {_i2} using leather, blaze rod, bone, gunpowder, ender pearl, gunpowder, bone, blaze rod, and leather with id "fari:orboflife"
+	register shaped recipe for {_i} using {_i3}, netherite scrap, gold block, netherite scrap, nautilus shell, netherite scrap, gold block, netherite scrap, and {_i3} with id "fari:wish"
+	register shaped recipe for {_i3} using diamond, {_i2}, diamond, {_i2}, wither skeleton skull, {_i2}, diamond, {_i2}, and diamond with id "fari:amplifiedorboflife"
+	register shaped recipe for {_w1} using breeze rod, Gold block, cobweb, fermented spider eye, ender pearl, fermented spider eye, cobweb, Gold block, and breeze rods with id "wishesexpanded:orbofdisruption"
+	register shaped recipe for {_w2} using gunpowder, fire charge, tnt, Spectral Arrow, {_i2}, Spectral Arrow, tnt, Firework Rocket, and gunpowder with id "wishesexpanded:orbofcombustion"
+	register shaped recipe for {_w3} using nether wart, diamond axe, nether wart, blaze rod, ender pearl, blaze rod, emerald block, diamond block, and emerald block with id "wishesexpanded:orbofanger"
+	
+	register shaped recipe for {_w4} using redstone block, {_i}, redstone block, {_i}, amethyst shard, {_i}, {_i}, diamond block, and {_i} with id "wishesexpanded:cursedwish"
+	
+	register shaped recipe for {_w5} using {_w2}, {_i3}, {_w2}, {_i}, {_i}, {_i}, bow, diamond block, and bow with id "wishesexpanded:projectilewish"
+	
+	register shaped recipe for {_w6} using phantom membrane, {_i3}, phantom membrane, {_i}, {_i}, {_i}, phantom membrane, diamond block, and phantom membrane with id "wishesexpanded:mobilitywish"
+	
+	register shaped recipe for {_w7} using {_w1}, Bucket of Pufferfish, {_w1}, {_i}, {_i}, {_i}, coal block, diamond block, and coal block with id "wishesexpanded:debuffwish"
+	
+	register shaped recipe for {_w8} using {_w3}, lapis block, {_w3}, {_i}, {_i3}, {_i}, golden apple, diamond block, and golden apple with id "wishesexpanded:damagewish"
+	
+	register shaped recipe for {_w9} using {_i2}, lapis block, {_i2}, {_i}, {_i3}, {_i}, golden apple, diamond block, and golden apple with id "wishesexpanded:sustainwish"
+	
+	register shaped recipe for {_w10} using {_i2}, golden apple, {_i2}, {_i}, {_i}, {_i}, gold block, diamond block, and gold block with id "wishesexpanded:supportwish"
+
+	register shaped recipe for enchanted golden apple using {_i3}, gold block, totem of undying, gold block, golden apple, gold block, totem of undying, gold block, and {_w3} with id "thalia:enchantedgoldenapple"
+	register shaped recipe for 2 phantom membrane using breeze rod, leather, breeze rod, leather, {_i2}, leather, breeze rod, leather, and breeze rod with id "thalia:phantommembrane"
+	register shaped recipe for 16 dragon's breath using phantom membrane, phantom membrane, phantom membrane, phantom membrane, phantom membrane, phantom membrane, glass, diamond, and glass with id "thalia:dragonsbreath"
+	register shaped recipe for {_i4} using dragon egg with id "thalia:dragoncore"
+	register shaped recipe for dragon egg using {_i4} with id "thalia:dragonegg"
+	register shaped recipe for cobweb using string, air, string, air, string, air, string, air, and string with id "thalia:cobweb"
+# prevents player from throwing orbs of life
+on right click:
+	name of player's tool is "&4Orb of Life":
+		cancel event
+	name of player's offhand tool is "&4Orb of Life":
+		cancel event
+	name of player's tool is "&4Amplified Orb of Life":	
+		cancel event
+	name of player's offhand tool is "&4Amplified Orb of Life":
+		cancel event
+	name of player's tool is "&8Orb of disruption":
+		cancel event
+	name of player's offhand tool is "&8Orb of disruption":
+		cancel event
+	name of player's tool is "&6Orb of combustion":
+		cancel event
+	name of player's offhand tool is "&6Orb of combustion":
+		cancel event
+	name of player's tool is "&4Orb of anger":
+		cancel event
+	name of player's offhand tool is "&4Orb of anger":
+		cancel event
+# possible gifts from reroll, any string works, should be easy to configure
+on load:
+	delete {possibleGifts::*}
+	add "glamoth" to {possibleGifts::*}
+	add "arcul" to {possibleGifts::*}
+	add "umbri" to {possibleGifts::*}
+	
+	add "florith" to {possibleGifts::*}
+	add "mystif" to {possibleGifts::*}
+# reroll function
+function giftReroll(p: player):
+# this snippet guarantees you can't get a duplicate gift 
+	set {_possibleRerollGifts::*} to {possibleGifts::*}
+	loop size of {%{_p}'s uuid%.gifts::*} times:
+		remove {%{_p}'s uuid%.gifts::%loop-value%} from {_possibleRerollGifts::*}
+	delete {%{_p}'s uuid%.gifts::*} 
+# if you want people to have a chance to get duplicate gifts, replace {_possibleRerollGifts::*} with {possibleGifts::*}
+# this gets a random gift, adds it to the player
+	set {_r} to random element out of {_possibleRerollGifts::*}
+	add {_r} to {%{_p}'s uuid%.gifts::*}
+# this resets attributes, it MAY conflict with other scripts that modify attributes!
+	resetPlayerAttributes({_p})
+# this resets effects, it MAY conflict with other scripts that modify effects!	
+	clear all potion effects of {_p}
+# insectio-specific, resets metamorphosis level + sets size, default size is configurable inside insectio.sk
+	{_r} is "insectio":
+		set generic scale attribute of {_p} to {insectio.defaultSize}
+		set {metamorphosis.insectio.%{_p}'s uuid%} to 0
+# witheria-specific, randomizes the perm effect given
+	{_r} is "witheria":
+		witheriaEffect({_p})
+# command to reroll a player's gift		
+command /giftreroll <player>:
+	permission: op
+	trigger:
+		giftReroll(arg-1)
+		send "&byou have rerolled %arg-1%'s gift!" to player
+# reroll item, be careful with this if player's can give items coloured names!
+on right click:
+	name of player's tool is "&5Wish":
+		if player is sneaking:
+			cancel event
+			giftReroll(player)
+			remove 1 of player's held item from player
+			send "&cYou feel like a part of you is missing, but only for a second..." to player
+			wait 2 seconds
+# visual & sound effects, purely cosmetic lol
+			set {_loc} to location 1 block above player	
+			play sound "block.beacon.activate" at volume 100 at {_loc} to all players
+			loop 90 times:
+				set {_v} to spherical vector with radius 3, yaw loop-value * 4, pitch 0
+				set {_v2} to spherical vector with radius 3, yaw loop-value * 4 + 90, pitch 0
+				set {_v3} to spherical vector with radius 3, yaw loop-value * 4 + 180, pitch 0
+				set {_v4} to spherical vector with radius 3, yaw loop-value * 4 + 270, pitch 0
+				make 1 of electric spark at location loop-value / 25 above player ~ {_v} with extra 0
+				make 1 of electric spark at location loop-value / 25 above player ~ {_v2} with extra 0
+				make 1 of electric spark at location loop-value / 25 above player ~ {_v3} with extra 0
+				make 1 of electric spark at location loop-value / 25 above player ~ {_v4} with extra 0
+				wait 1 tick
+# auto gives the recipes when a player joins			
+on join:
+	unlock recipe "fari:orboflife" for player
+	unlock recipe "fari:amplifiedorboflife" for player
+	unlock recipe "fari:wish" for player
+	unlock recipe "thalia:enchantedgoldenapple" for player
+	unlock recipe "thalia:phantommembrane" for player
+	unlock recipe "thalia:dragonsbreath" for player
+	unlock recipe "thalia:dragoncore" for player
+	unlock recipe "thalia:dragonegg" for player
+	unlock recipe "thalia:cobweb" for player
+	unlock recipe "wishesexpanded:orbofdisruption" for player
+	unlock recipe "wishesexpanded:orbofcombustion" for player
+	unlock recipe "wishesexpanded:orbofanger" for player
+	unlock recipe "wishesexpanded:damagewish" for player
+	unlock recipe "wishesexpanded:supportwish" for player
+	unlock recipe "wishesexpanded:cursedwish" for player
+	unlock recipe "wishesexpanded:debuffwish" for player
+	unlock recipe "wishesexpanded:sustainwish" for player
+	unlock recipe "wishesexpanded:projectilewish" for player
+	unlock recipe "wishesexpanded:mobilitywish" for player
+
+#command /unlockmorewish <offlineplayer>:
+#	permission: op
+#	trigger:
+#		if {%arg-1's uuid%.unlockedrecipe::*} contains "different wishes":
+#			send "&b%arg-1% already unlocked wishes expanded wishes" to player
+#		else:
+#			add "different wishes" to {%arg-1's uuid%.unlockedrecipe::*}
+command /removerecipes:
+	permission: op
+	trigger:
+		remove custom recipe "skbee:wish"
+		remove custom recipe "fari:wish"
+		remove custom recipe "fari:orboflife"
+		remove custom recipe "fari:amplifiedorboflife"
+		remove custom recipe "fari:stoneofawakening"
+		
+# purely optional log to record when people craft wishes		
+on craft:
+	event-string contains "Wish":
+		log "%player% crafted a wish" to "wish.log"
+# easy way to get a wish without having to craft one
+command /freewish:
+	permission: op
+	trigger:
+		set {_w} to nether star named "&5Wish" with lore "&7&oA mysterious item used to change your gift." and "&5&lRIGHT CLICK TO CONSUME"
+		give player {_w}
+command /freeorboflife:
+	permission: op
+	trigger:
+		give player ender pearl named "&4Orb of Life" with lore "&7&oCrafted from the parts of many living things"
+command /freeamplifiedorboflife:
+	permission: op
+	trigger:
+		give player ender pearl named "&4Amplified Orb of Life" with lore "&7&oHolds the remnants of many living things"
+command /freeorbofdisruption:
+	permission: op
+	trigger:
+		give player ender pearl named "&8Orb of disruption" with lore "&7&oA dooming aura surrounds it"
+command /freeorbofcombustion:
+	permission: op
+	trigger:
+		give player ender pearl named "&6Orb of combustion" with lore "&7&oHolds a lot of kinetic energy, you can't harness it"
+command /freeorbofanger:
+	permission: op
+	trigger:
+		give player ender pearl named "&4Orb of anger" with lore "&7&oHolds the anger of many violent creatures"

@@ -1,0 +1,32 @@
+#fire res drain
+on damage:
+    if {%attacker's uuid%.gifts::*} contains "effecttest1":
+        if victim has potion fire resistance:
+            set {_a} to duration of potion effect fire resistance of victim
+           
+            set {_a} to {_a} parsed as a number
+            send {_a} to attacker
+            remove fire resistance from the victim
+            apply potion of fire resistance to attacker for {_a}
+            if {_a} > 0:
+                apply potion of fire resistance to victim for {_a}
+            delete {_a}
+
+
+# deals more dmg based of their own hp
+# max dmg bonus of +4
+on damage:
+	if {%attacker's uuid%.gifts::*} contains "effecttest1":
+
+		if attack cooldown of attacker is 1:
+			set {_i} to attacker's health/5
+			add {_i} to damage
+			delete {_i}
+#chance to negate damage based on hp remaining				
+on damage:
+	if {%victim's uuid%.gifts::*} contains "effecttest1":
+		chance of (2*(20-victim's health))%:
+			cancel event
+			draw 1 of flash at victim
+			play sound "minecraft:block.beacon.activate" at victim
+			

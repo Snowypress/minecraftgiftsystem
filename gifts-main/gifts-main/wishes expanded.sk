@@ -1,0 +1,388 @@
+command /freecursedwish:
+	permission: op
+	trigger:
+		set {_w} to nether star named "&4Cursed Wish" with lore "&7&6used to change your gift into one of the cursed gifts." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+		add nbt from "{thalia:cursedreroll}" to custom nbt of {_w}
+		give player {_w}
+command /freeprojectilewish:
+	permission: op
+	trigger:
+		set {_w} to nether star named "&6Projectile Wish" with lore "&7&9used to change your gift into one of the ones that benefits from projectiles." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+		add nbt from "{thalia:movereroll}" to custom nbt of {_w}
+		give player {_w}
+command /freemobilitywish:
+	permission: op
+	trigger:
+		set {_w} to nether star named "&2Mobility wish" with lore "&7&9used to change your gift into one of the ones that grant some mobility." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+		add nbt from "{thalia:movereroll}" to custom nbt of {_w}
+		give player {_w}
+command /freedebuffwish:
+	permission: op
+	trigger:
+		set {_w} to nether star named "&8Debuff Wish" with lore "&7&9used to change your gift into one of the ones that grant some debuffs to others." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+		add nbt from "{thalia:movereroll}" to custom nbt of {_w}
+		give player {_w}
+command /freedamagewish:
+	permission: op
+	trigger:
+		set {_w} to nether star named "&dStrength wish" with lore "&7&9used to change your gift into one of the ones that grant additional damage." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+		add nbt from "{thalia:movereroll}" to custom nbt of {_w}
+		give player {_w}
+command /freesustainwish:
+	permission: op
+	trigger:
+		set {_w} to nether star named "&3Sustain wish" with lore "&7&9used to change your gift into one of the ones that grant some survivability." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+		add nbt from "{thalia:movereroll}" to custom nbt of {_w}
+		give player {_w}
+command /freesupportwish:
+	permission: op
+	trigger:
+		set {_w} to nether star named "&aSupport wish" with lore "&7&9used to change your gift into one of the ones benefits your team." and "&5&lSHIFT RIGHT CLICK TO CONSUME"
+		add nbt from "{thalia:movereroll}" to custom nbt of {_w}
+		give player {_w}
+on right click:
+	name of player's tool is "&4Cursed Wish":
+		if player is sneaking:
+			cancel event
+			cursegiftroll(player)
+			remove 1 of player's held item from player
+			send "&cSuch a dangerous substance, well, so be it, it hurts but now you feel different" to player
+			wait 2 seconds
+# visual & sound effects, purely cosmetic lol
+			set {_loc} to location 1 block above player	
+			play sound "entity.evoker.prepare_attack" at volume 100 at {_loc} to all players
+			set {_z} to 1
+			set {_z} to 0
+			loop 40 times:
+				set {_a} to 0
+				loop 90 times:
+					set {_v} to spherical vector with radius 1, yaw {_a}*4, pitch player's pitch 
+					draw 1 of dust using dustOption(rgb(255, 0, 0), 1) at location {_z} above player ~ {_v}
+					set {_a} to {_a}+1
+				set {_z} to {_z}+0.05
+				wait 1 tick
+
+
+
+on right click:
+	name of player's tool is "&2Mobility Wish":
+		if player is sneaking:
+			cancel event
+			movegiftroll(player)
+			remove 1 of player's held item from player
+			send "&bYour legs feel numb, then you feel different" to player
+			wait 2 seconds
+# visual & sound effects, purely cosmetic lol
+			set {_loc} to location 1 block above player	
+			play sound "entity.ender_dragon.ambient" at volume 100 at {_loc} to all players
+			set {_z} to 1
+			set {_b} to 1
+			loop 20 times:
+				set {_a} to 0
+				loop 90 times:
+					set {_v} to spherical vector with radius 1, yaw {_a}*4, pitch player's pitch 
+					draw 1 of dust using dustOption(rgb(0, 0,255), 1) at location {_z} above player ~ {_v}
+					draw 1 of dust using dustOption(rgb(0, 0, 255), 1) at location {_b} above player ~ {_v}
+					set {_a} to {_a}+1
+				set {_z} to {_z}+0.05
+				set {_b} to {_b}-0.05
+				wait 1 tick
+
+
+
+on right click:
+	name of player's tool is "&6Projectile Wish":
+		if player is sneaking:
+			cancel event
+			projectilegiftreroll(player)
+			remove 1 of player's held item from player
+			send "&bYour eyes can't open for a bit, then you feel different" to player
+			wait 2 seconds
+# visual & sound effects, purely cosmetic lol
+			set {_loc} to location 1 block above player	
+			play sound "block.beacon.activate" at volume 100 at {_loc} to all players
+			set {_b} to 2
+			loop 40 times:
+				set {_a} to 0
+				loop 90 times:
+					set {_v} to spherical vector with radius 1, yaw {_a}*4, pitch player's pitch 
+					draw 1 of dust using dustOption(rgb(215,136,16), 1) at location {_b} above player ~ {_v}
+					set {_a} to {_a}+1
+				set {_b} to {_b}-0.05
+				wait 1 tick
+
+
+
+on right click:
+	name of player's tool is "&8Debuff Wish":
+		if player is sneaking:
+			cancel event
+			debuffgiftreroll(player)
+			remove 1 of player's held item from player
+			send "&bYour soul feel numb, then you feel different" to player
+			wait 2 seconds
+# visual & sound effects, purely cosmetic lol
+			set {_loc} to location 1 block above player	
+			play sound "block.beacon.activate" at volume 100 at {_loc} to all players
+			set {_z} to 0
+			set {_z} to 1
+			set {_b} to 1
+			loop 20 times:
+				set {_a} to 0
+				loop 90 times:
+					set {_v} to spherical vector with radius 1, yaw {_a}*4, pitch player's pitch 
+					draw 1 of dust using dustOption(rgb(0, 0,0), 1) at location {_z} above player ~ {_v}
+					draw 1 of dust using dustOption(rgb(0, 0, 0), 1) at location {_b} above player ~ {_v}
+					set {_a} to {_a}+1
+				set {_z} to {_z}+0.05
+				set {_b} to {_b}-0.05
+				wait 1 tick
+
+
+
+on right click:
+	name of player's tool is "&aSupport Wish":
+		if player is sneaking:
+			cancel event
+			supportgiftreroll(player)
+			remove 1 of player's held item from player
+			send "&bYour heart feel numb, then you feel different" to player
+			wait 2 seconds
+# visual & sound effects, purely cosmetic lol
+			set {_loc} to location 1 block above player	
+			play sound "block.beacon.activate" at volume 100 at {_loc} to all players
+			set {_z} to 1
+			set {_b} to 1
+			loop 20 times:
+				set {_a} to 0
+				loop 90 times:
+					set {_v} to spherical vector with radius 1, yaw {_a}*4, pitch player's pitch 
+					draw 1 of dust using dustOption(rgb(0, 255, 0), 1) at location {_z} above player ~ {_v}
+					draw 1 of dust using dustOption(rgb(0, 255, 0), 1) at location {_b} above player ~ {_v}
+					set {_a} to {_a}+1
+				set {_z} to {_z}+0.05
+				set {_b} to {_b}-0.05
+				wait 1 tick
+
+
+
+on right click:
+	name of player's tool is "&3Sustain Wish":
+		if player is sneaking:
+			cancel event
+			sustaingiftreroll(player)
+			remove 1 of player's held item from player
+			send "&bYour chest feel numb, then you feel different" to player
+			wait 2 seconds
+# visual & sound effects, purely cosmetic lol
+			set {_loc} to location 1 block above player	
+			play sound "block.beacon.activate" at volume 100 at {_loc} to all players
+			set {_z} to 1
+			set {_b} to 1
+			loop 20 times:
+				set {_a} to 0
+				loop 90 times:
+					set {_v} to spherical vector with radius 1, yaw {_a}*4, pitch player's pitch 
+					draw 1 of dust using dustOption(rgb(0, 125, 125), 1) at location {_z} above player ~ {_v}
+					draw 1 of dust using dustOption(rgb(0, 125, 125), 1) at location {_b} above player ~ {_v}
+					set {_a} to {_a}+1
+				set {_z} to {_z}+0.05
+				set {_b} to {_b}-0.05
+				wait 1 tick
+
+
+
+on right click:
+	name of player's tool is "&dStrength Wish":
+		if player is sneaking:
+			cancel event
+			damagegiftreroll(player)
+			remove 1 of player's held item from player
+			send "&bYour arms feel numb, then you feel different" to player
+			wait 2 seconds
+# visual & sound effects, purely cosmetic lol
+			set {_loc} to location 1 block above player	
+			play sound "block.beacon.activate" at volume 100 at {_loc} to all players
+			set {_z} to 0
+			set {_z} to 1
+			set {_b} to 1
+			loop 20 times:
+				set {_a} to 0
+				loop 90 times:
+					set {_v} to spherical vector with radius 1, yaw {_a}*4, pitch player's pitch 
+					draw 1 of dust using dustOption(rgb(255, 0,255), 1) at location {_z} above player ~ {_v}
+					draw 1 of dust using dustOption(rgb(255, 0, 255), 1) at location {_b} above player ~ {_v}
+					set {_a} to {_a}+1
+				set {_z} to {_z}+0.05
+				set {_b} to {_b}-0.05
+				wait 1 tick
+function movegiftroll(p: player):
+# this snippet guarantees you can't get a duplicate gift 
+	set {_movegiftslist::*} to {movegifts::*}
+	loop size of {%{_p}'s uuid%.gifts::*} times:
+		remove {%{_p}'s uuid%.gifts::%loop-value%} from {_movegiftslist::*}
+	delete {%{_p}'s uuid%.gifts::*} 
+# if you want people to have a chance to get duplicate gifts, replace {_possibleRerollGifts::*} with {possibleGifts::*}
+# this gets a random gift, adds it to the player
+	set {_r} to random element out of {_movegiftslist::*}
+	add {_r} to {%{_p}'s uuid%.gifts::*}
+# this resets attributes, it MAY conflict with other scripts that modify attributes!
+	resetPlayerAttributes({_p})
+# this resets effects, it MAY conflict with other scripts that modify effects!	
+	clear all potion effects of {_p}
+
+
+
+function cursegiftroll(p: player):
+# this snippet guarantees you can't get a duplicate gift 
+	set {_cursedgiftslist::*} to {cursedgifts::*}
+	loop size of {%{_p}'s uuid%.gifts::*} times:
+		remove {%{_p}'s uuid%.gifts::%loop-value%} from {_cursedgiftslist::*}
+	delete {%{_p}'s uuid%.gifts::*} 
+# if you want people to have a chance to get duplicate gifts, replace {_possibleRerollGifts::*} with {possibleGifts::*}
+# this gets a random gift, adds it to the player
+	set {_r} to random element out of {_cursedgiftslist::*}
+	add {_r} to {%{_p}'s uuid%.gifts::*}
+# this resets attributes, it MAY conflict with other scripts that modify attributes!
+	resetPlayerAttributes({_p})
+# this resets effects, it MAY conflict with other scripts that modify effects!	
+	clear all potion effects of {_p}
+
+
+
+function damagegiftreroll(p: player):
+# this snippet guarantees you can't get a duplicate gift 
+	set {_damagegiftslist::*} to {damagegifts::*}
+	loop size of {%{_p}'s uuid%.gifts::*} times:
+		remove {%{_p}'s uuid%.gifts::%loop-value%} from {_damagegiftslist::*}
+	delete {%{_p}'s uuid%.gifts::*} 
+# if you want people to have a chance to get duplicate gifts, replace {_possibleRerollGifts::*} with {possibleGifts::*}
+# this gets a random gift, adds it to the player
+	set {_r} to random element out of {_damagegiftslist::*}
+	add {_r} to {%{_p}'s uuid%.gifts::*}
+# this resets attributes, it MAY conflict with other scripts that modify attributes!
+	resetPlayerAttributes({_p})
+# this resets effects, it MAY conflict with other scripts that modify effects!	
+	clear all potion effects of {_p}
+
+
+
+
+function supportgiftreroll(p: player):
+# this snippet guarantees you can't get a duplicate gift 
+	set {_supportgiftslist::*} to {supportgifts::*}
+	loop size of {%{_p}'s uuid%.gifts::*} times:
+		remove {%{_p}'s uuid%.gifts::%loop-value%} from {_supportgiftslist::*}
+	delete {%{_p}'s uuid%.gifts::*} 
+# if you want people to have a chance to get duplicate gifts, replace {_possibleRerollGifts::*} with {possibleGifts::*}
+# this gets a random gift, adds it to the player
+	set {_r} to random element out of {_supportgiftslist::*}
+	add {_r} to {%{_p}'s uuid%.gifts::*}
+# this resets attributes, it MAY conflict with other scripts that modify attributes!
+	resetPlayerAttributes({_p})
+# this resets effects, it MAY conflict with other scripts that modify effects!	
+	clear all potion effects of {_p}
+
+
+
+
+function projectilegiftreroll(p: player):
+# this snippet guarantees you can't get a duplicate gift 
+	set {_projectilegiftslist::*} to {projectilegifts::*}
+	loop size of {%{_p}'s uuid%.gifts::*} times:
+		remove {%{_p}'s uuid%.gifts::%loop-value%} from {_projectilegiftslist::*}
+	delete {%{_p}'s uuid%.gifts::*} 
+# if you want people to have a chance to get duplicate gifts, replace {_possibleRerollGifts::*} with {possibleGifts::*}
+# this gets a random gift, adds it to the player
+	set {_r} to random element out of {_projectilegiftslist::*}
+	add {_r} to {%{_p}'s uuid%.gifts::*}
+# this resets attributes, it MAY conflict with other scripts that modify attributes!
+	resetPlayerAttributes({_p})
+# this resets effects, it MAY conflict with other scripts that modify effects!	
+	clear all potion effects of {_p}
+
+
+
+
+function debuffgiftreroll(p: player):
+# this snippet guarantees you can't get a duplicate gift 
+	set {_debuffgiftslist::*} to {debuffgifts::*}
+	loop size of {%{_p}'s uuid%.gifts::*} times:
+		remove {%{_p}'s uuid%.gifts::%loop-value%} from {_debuffgiftslist::*}
+	delete {%{_p}'s uuid%.gifts::*} 
+# if you want people to have a chance to get duplicate gifts, replace {_possibleRerollGifts::*} with {possibleGifts::*}
+# this gets a random gift, adds it to the player
+	set {_r} to random element out of {_debuffgiftslist::*}
+	add {_r} to {%{_p}'s uuid%.gifts::*}
+# this resets attributes, it MAY conflict with other scripts that modify attributes!
+	resetPlayerAttributes({_p})
+# this resets effects, it MAY conflict with other scripts that modify effects!	
+	clear all potion effects of {_p}
+
+
+
+
+function sustaingiftreroll(p: player):
+# this snippet guarantees you can't get a duplicate gift 
+	set {_sustaingiftslist::*} to {sustaingifts::*}
+	loop size of {%{_p}'s uuid%.gifts::*} times:
+		remove {%{_p}'s uuid%.gifts::%loop-value%} from {_sustaingiftslist::*}
+	delete {%{_p}'s uuid%.gifts::*} 
+# if you want people to have a chance to get duplicate gifts, replace {_possibleRerollGifts::*} with {possibleGifts::*}
+# this gets a random gift, adds it to the player
+	set {_r} to random element out of {_sustaingiftslist::*}
+	add {_r} to {%{_p}'s uuid%.gifts::*}
+# this resets attributes, it MAY conflict with other scripts that modify attributes!
+	resetPlayerAttributes({_p})
+# this resets effects, it MAY conflict with other scripts that modify effects!	
+	clear all potion effects of {_p}
+on load:
+	delete {cursedgifts::*}
+	delete {movegifts::*}
+	delete {damagegifts::*}
+	delete {supportgifts::*}
+	delete {projectilegifts::*}
+	delete {debuffgifts::*}
+	delete {sustaingifts::*}
+	add "commando" to {cursedgifts::*}
+	add "berserker" to {cursedgifts::*}
+	add "burnice" to {cursedgifts::*}
+	
+	add "agilie" to {movegifts::*}
+	add "grytho" to {movegifts::*}
+	add "glamoth" to {movegifts::*}
+	add "tachea" to {movegifts::*}
+	
+	add "duala" to {damagegifts::*}
+	add "levelhunter" to {damagegifts::*}
+	add "florith" to {damagegifts::*}
+	add "sizer" to {damagegifts::*}
+	add "witheria" to {damagegifts::*}
+	add "muriace" to {damagegifts::*}
+	
+	
+	add "florith" to {supportgifts::*}
+	add "treasuria" to {supportgifts::*}
+	add "duralo" to {supportgifts::*}
+	add "forgiph" to {supportgifts::*}
+	add "tachea" to {supportgifts::*}
+	
+	add "grytho" to {projectilegifts::*}
+	add "mystif" to {projectilegifts::*}
+	add "arcul" to {projectilegifts::*}
+	add "controlix" to {projectilegifts::*}
+	 
+	
+	add "arcul" to {debuffgifts::*}
+	add "umbri" to {debuffgifts::*}
+	add "levelhunter" to {debuffgifts::*}
+	add "thorneria" to {debuffgifts::*}
+	
+	
+	add "sizer" to {sustaingifts::*}
+	add "mystif" to {sustaingifts::*}
+	add "fortov" to {sustaingifts::*}
+	add "maloc" to {sustaingifts::*}
+	add "duralo" to {sustaingifts::*}
+	add "muriace" to {sustaingifts::*}
+	

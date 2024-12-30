@@ -1,0 +1,32 @@
+# chance to double experience gained
+on swap hand items:
+	if {%player's uuid%.gifts::*} contains "mystif":
+		player does not have potion bad luck:
+			if player is sneaking:
+				set {_h} to 2+player's level/25
+				if {_h} > 6:
+					set {_i} to 6
+				heal player by {_h}
+				play sound "entity.witch.drink" at player
+				apply bad luck of tier 1 to player for 30 seconds
+				reduce the player's level by 10
+on right click:
+	if {%player's uuid%.gifts::*} contains "mystif":
+		if player's held item is wooden sword or stone sword or golden sword or iron sword or diamond sword or netherite sword:
+			if player is sneaking:
+				if player's level > 4:
+					player does not have potion luck:
+						play sound "entity.breeze.charge" at player
+						apply luck of tier 1 to player for 25 seconds
+						wait 0.4 second
+						set {_p} to 3+player's level/20
+						if {_p} > 10:
+							set {_p} to 10
+						shoot Spectral Arrow from player with velocity 2*{_p}
+						play sound "entity.breeze.shoot" at player
+						reduce the player's level by 4
+						
+#chance to negate damage based on levels				
+on player pickup xp:
+	if {%player's uuid%.gifts::*} contains "mystif":
+		add event-number to player's total experience

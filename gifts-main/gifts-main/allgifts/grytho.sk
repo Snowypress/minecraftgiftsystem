@@ -1,0 +1,87 @@
+on right click:
+	if {%player's uuid%.gifts::*} contains "grytho":
+		if player is sneaking:
+			if player's held item is feather:
+				if {GrythoFCD.%player's uuid%.timer} is set:
+					message "&4Grytho Flight NOT READY." to player
+				else:
+					push player upwards at speed 2
+					add 30 to {GrythoFCD.%player's uuid%.timer}
+					if the player has potion slow falling:
+						remove slow falling from the player
+					apply slow falling of tier 3 to player for 5.5 seconds
+					play sound "entity.ender_dragon.flap" at player
+on left click:
+	if {%player's uuid%.gifts::*} contains "grytho":
+		if player's held item is feather:
+			if the player has potion slow falling:
+				if the amplifier of slow falling of player > 2:
+					if {GrythoFeatherCD.%player's uuid%.timer} is set:
+						message "&4Outta feathers." to player
+					else:
+						add 23 to {GrythoFeatherCD.%player's uuid%.timer}
+						set {_missilecount} to 0
+						while {_missilecount} < 20:
+							set {_missilecount} to {_missilecount}+1
+							shoot shulker bullet from player with velocity 0.3*{_missilecount}
+							push player forwards at speed 0.01*{_missilecount}
+							wait 0.01 second
+on damage:
+	damage cause is projectile:
+		event-projectile is shulker bullet:
+			if {%attacker's uuid%.gifts::*} contains "grytho":
+				set damage to 5
+				if victim doesn't have potion levitation:
+					apply levitation of tier 4 to victim for 3 seconds
+				else:
+					remove levitation from the victim
+					apply levitation of tier 4 to victim for 3 seconds
+on eat:
+	if {%player's uuid%.gifts::*} contains "grytho":
+		event-item is golden carrot:
+			add 2 to saturation of player
+		event-item is golden apple:
+			add 2 to health of player
+
+on swap hand items:
+	if {%player's uuid%.gifts::*} contains "grytho":
+		if player is sneaking:
+			if {GrythoSurvive.%player's uuid%.timer} is set:
+				message "&cAnicent power is on cooldown." to player
+				message {GrythoSurvive.%player's uuid%.timer} and "seconds" to player
+			else:
+				add 110 to {GrythoSurvive.%player's uuid%.timer}
+				if player doesn't have potion strength:
+					apply strength of tier 2 to player for 20 seconds
+				apply resistance of tier 1 to player for 20 seconds
+				apply Regeneration of tier 1 to player for 20 seconds
+				
+				
+				
+on respawn:
+	if {GrythoFCD.%player's uuid%.timer} is set:
+		delete {GrythoFCD.%player's uuid%.timer}
+		message "&2Grytho Flight READY." to player
+	if {GrythoFeatherCD.%player's uuid%.timer} is set:
+		delete {GrythoFeatherCD.%player's uuid%.timer}
+		message "&aCAW CAW CAW CAW." to player
+	if {GrythoSurvive.%player's uuid%.timer} is set:
+		delete {GrythoSurvive.%player's uuid%.timer}
+		message "&6Ancient power ready." to player
+every 1 second:
+	loop players:
+		if {GrythoFCD.%loop-player's uuid%.timer} is set:
+			remove 1 from {GrythoFCD.%loop-player's uuid%.timer}
+			if {GrythoFCD.%loop-player's uuid%.timer} is 0:
+				delete {GrythoFCD.%loop-player's uuid%.timer}
+				message "&2Grytho Flight READY." to loop-player
+		if {GrythoFeatherCD.%loop-player's uuid%.timer} is set:
+			remove 1 from {GrythoFeatherCD.%loop-player's uuid%.timer}
+			if {GrythoFeatherCD.%loop-player's uuid%.timer} is 0:
+				delete {GrythoFeatherCD.%loop-player's uuid%.timer}
+				message "&aCAW CAW CAW CAW." to loop-player
+		if {GrythoSurvive.%loop-player's uuid%.timer} is set:
+			remove 1 from {GrythoSurvive.%loop-player's uuid%.timer}
+			if {GrythoSurvive.%loop-player's uuid%.timer} is 0:
+				delete {GrythoSurvive.%loop-player's uuid%.timer}
+				message "&6Ancient power ready." to loop-player
